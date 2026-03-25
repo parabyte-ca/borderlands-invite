@@ -162,6 +162,8 @@ body {
 .ctrl-btn:hover { background:linear-gradient(180deg,#5c3d10 0%,#3a2508 100%); transform:translateY(-2px); }
 .ctrl-btn.secondary { background:transparent; color:var(--ink); border-color:var(--border); }
 .ctrl-btn.secondary:hover { background:rgba(0,0,0,0.06); }
+.ctrl-btn.danger { background:linear-gradient(180deg,#4a0e0e 0%,#2e0808 100%); border-color:#8b2020; }
+.ctrl-btn.danger:hover { background:linear-gradient(180deg,#6b1a1a 0%,#4a0e0e 100%); }
 
 /* ── EMPTY / LOADING STATES ── */
 .state-msg {
@@ -263,6 +265,7 @@ body {
         <div class="ctrl-row">
           <button class="ctrl-btn" onclick="loadData()">⟳ &nbsp; Refresh Ledger</button>
           <button class="ctrl-btn secondary" onclick="exportCSV()">⬇ &nbsp; Export as CSV</button>
+          <button class="ctrl-btn danger" onclick="clearResults()">🗑 &nbsp; Clear All Results</button>
         </div>
       </div>
 
@@ -471,6 +474,30 @@ function escHtml(s) {
 }
 
 // ── CSV export ──
+async function clearResults() {
+  if (!allSubmissions.length) { alert('The ledger is already empty.'); return; }
+  const confirmed = confirm(
+    '⚠ Are you sure you want to clear ALL ' + allSubmissions.length +
+    ' submission' + (allSubmissions.length !== 1 ? 's' : '') + '?\n\nThis cannot be undone.'
+  );
+  if (!confirmed) return;
+  try {
+    await fetch('https://api.jsonbin.io/v3/b/' + JSONBIN_ID, {
+      method:  'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
+      body:    JSON.stringify({ submissions: [] })
+    });
+    allSubmissions = [];
+    ['statsSection','divider1','tallySection','divider2','regSection'].forEach(function(id){
+      document.getElementById(id).style.display = 'none';
+    });
+    document.getElementById('stateMsg').style.display = 'block';
+    document.getElementById('stateMsg').innerHTML = '<div class="state-msg">The ledger has been cleared.<br><em style="font-size:14px;">No adventurers have registered yet…</em></div>';
+  } catch(e) {
+    alert('⚠ Failed to clear the ledger. Please try again.');
+  }
+}
+
 function exportCSV() {
   if (!allSubmissions.length) { alert('No submissions to export yet.'); return; }
   const headers = ['Timestamp','Adventurer','Parent','Phone','Email','Class','Available Times','Notes'];
