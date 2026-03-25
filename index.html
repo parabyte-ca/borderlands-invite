@@ -80,7 +80,7 @@ body {
 .rune-border-wrap { display:flex; position:relative; }
 .rune-col {
   writing-mode:vertical-lr; text-orientation:mixed;
-  font-family:'Cinzel',serif; font-size:9px; letter-spacing:5px;
+  font-family:'Cinzel',serif; font-size:10px; letter-spacing:5px;
   color:var(--ink-faded); opacity:0.6; padding:8px 0;
   width:22px; flex-shrink:0; text-align:center;
   border-right:1.5px solid rgba(58,37,8,0.35);
@@ -111,7 +111,7 @@ body {
 .banner-ribbon::after{left:100%;margin-left:-2px;clip-path:polygon(0 0,100% 18%,100% 82%,0 100%);}
 .banner-text {
   font-family:'Chomsky',serif;
-  font-size:clamp(22px,4.5vw,40px);
+  font-size:clamp(23px,4.5vw,41px);
   color:var(--parch); letter-spacing:3px;
   text-shadow:0 0 22px rgba(200,150,30,0.45),1px 2px 0 rgba(0,0,0,0.7);
   white-space:nowrap;
@@ -120,7 +120,7 @@ body {
 /* ── ORNAMENT RULES ── */
 .orn-rule { display:flex; align-items:center; gap:10px; margin:10px 18px; }
 .orn-line { flex:1; height:1.5px; background:linear-gradient(90deg,transparent,var(--border),transparent); }
-.orn-mid  { font-size:14px; color:var(--gold); letter-spacing:8px; }
+.orn-mid  { font-size:15px; color:var(--gold); letter-spacing:8px; }
 
 /* ── HERO ILLUSTRATION PANEL ── */
 .hero-panel {
@@ -139,7 +139,7 @@ body {
 }
 .hero-cap {
   background:linear-gradient(90deg,var(--border) 0%,#5a3a10 50%,var(--border) 100%);
-  text-align:center; font-family:'Cinzel',serif; font-size:9.5px;
+  text-align:center; font-family:'Cinzel',serif; font-size:10.5px;
   letter-spacing:5px; color:var(--parch-mid); padding:5px 12px;
   text-transform:uppercase; border-top:1.5px solid var(--gold); opacity:0.9;
 }
@@ -154,16 +154,16 @@ body {
 .panel-cell { padding:16px 18px; position:relative; }
 .panel-cell:first-child { border-right:1.5px solid var(--border); }
 .cell-title {
-  font-family:'Cinzel',serif; font-size:10.5px; font-weight:700;
+  font-family:'Cinzel',serif; font-size:11.5px; font-weight:700;
   letter-spacing:3px; color:var(--blood); text-transform:uppercase;
   border-bottom:1px solid rgba(107,26,26,0.3); padding-bottom:7px; margin-bottom:10px;
 }
-.cell-body { font-size:14.5px; line-height:1.88; color:var(--ink-mid); }
+.cell-body { font-size:15.5px; line-height:1.88; color:var(--ink-mid); }
 .cell-body strong { font-style:italic; color:var(--ink); }
 
 /* ── CONTACT BOX ── */
 .section-header {
-  font-family:'Cinzel',serif; font-size:10.5px; letter-spacing:3.5px; color:var(--blood);
+  font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:3.5px; color:var(--blood);
   text-transform:uppercase; text-align:center; margin-bottom:10px;
 }
 .contact-box {
@@ -175,15 +175,15 @@ body {
 .cbr { position:absolute; width:14px; height:14px; border-color:var(--gold-bright); border-style:solid; }
 .cbr.tl{top:-1px;left:-1px;border-width:3px 0 0 3px;} .cbr.tr{top:-1px;right:-1px;border-width:3px 3px 0 0;}
 .cbr.bl{bottom:-1px;left:-1px;border-width:0 0 3px 3px;} .cbr.br{bottom:-1px;right:-1px;border-width:0 3px 3px 0;}
-.c-name { font-family:'Cinzel',serif; font-size:17px; font-weight:700; color:var(--ink); margin-bottom:3px; letter-spacing:1px; }
-.c-role { font-style:italic; font-size:13px; color:var(--blood); margin-bottom:13px; }
-.c-row  { display:flex; align-items:flex-start; justify-content:center; gap:9px; margin:5px 0; font-size:14px; color:var(--ink-mid); }
+.c-name { font-family:'Cinzel',serif; font-size:18px; font-weight:700; color:var(--ink); margin-bottom:3px; letter-spacing:1px; }
+.c-role { font-style:italic; font-size:14px; color:var(--blood); margin-bottom:13px; }
+.c-row  { display:flex; align-items:flex-start; justify-content:center; gap:9px; margin:5px 0; font-size:15px; color:var(--ink-mid); }
 .c-icon { color:var(--gold); flex-shrink:0; }
 
 /* ── CALENDAR ── */
-.cal-intro { text-align:center; font-style:italic; font-size:14px; color:var(--ink-faded); margin-bottom:16px; line-height:1.7; }
+.cal-intro { text-align:center; font-style:italic; font-size:15px; color:var(--ink-faded); margin-bottom:16px; line-height:1.7; }
 .cal-week-label {
-  font-family:'Cinzel',serif; font-size:9px; font-weight:700; letter-spacing:3px;
+  font-family:'Cinzel',serif; font-size:10px; font-weight:700; letter-spacing:3px;
   color:var(--blood); text-transform:uppercase; text-align:center;
   border-bottom:1px solid rgba(107,26,26,0.25); padding-bottom:5px; margin:14px 0 8px;
   grid-column: 1 / -1;
@@ -197,14 +197,14 @@ body {
 }
 .sun-card:hover { background:rgba(180,130,30,0.15); border-color:var(--gold); transform:translateY(-2px); box-shadow:0 5px 14px rgba(0,0,0,0.22),inset 0 0 0 1px var(--gold); }
 .sun-card.chosen { background:linear-gradient(135deg,rgba(120,85,15,0.28),rgba(196,149,24,0.22)); border-color:var(--gold-bright); box-shadow:0 0 0 1.5px var(--gold-bright),0 5px 14px rgba(0,0,0,0.22); }
-.sun-card.chosen::after { content:'✦'; position:absolute; top:3px; right:5px; font-size:9px; color:var(--gold-bright); }
-.sun-mo { font-family:'Cinzel',serif; font-size:10px; font-weight:700; letter-spacing:2px; color:var(--blood); text-transform:uppercase; margin-bottom:3px; }
-.sun-dd { font-family:'Cinzel',serif; font-size:13px; font-weight:600; color:var(--ink); line-height:1.2; margin-bottom:4px; }
-.sun-dy { font-family:'Cinzel',serif; font-size:9.5px; font-weight:600; letter-spacing:1px; color:var(--ink-mid); margin-top:2px; }
-.sun-time { font-style:italic; font-size:11.5px; color:var(--ink-faded); margin-top:5px; border-top:1px solid rgba(58,37,8,0.2); padding-top:4px; line-height:1.5; }
+.sun-card.chosen::after { content:'✦'; position:absolute; top:3px; right:5px; font-size:10px; color:var(--gold-bright); }
+.sun-mo { font-family:'Cinzel',serif; font-size:11px; font-weight:700; letter-spacing:2px; color:var(--blood); text-transform:uppercase; margin-bottom:3px; }
+.sun-dd { font-family:'Cinzel',serif; font-size:14px; font-weight:600; color:var(--ink); line-height:1.2; margin-bottom:4px; }
+.sun-dy { font-family:'Cinzel',serif; font-size:10.5px; font-weight:600; letter-spacing:1px; color:var(--ink-mid); margin-top:2px; }
+.sun-time { font-style:italic; font-size:12.5px; color:var(--ink-faded); margin-top:5px; border-top:1px solid rgba(58,37,8,0.2); padding-top:4px; line-height:1.5; }
 .sel-dates {
   margin-top:10px; border:1.5px dashed rgba(58,37,8,0.38); padding:9px 14px;
-  font-style:italic; font-size:13.5px; color:var(--ink-faded); min-height:36px;
+  font-style:italic; font-size:14.5px; color:var(--ink-faded); min-height:36px;
   background:rgba(255,255,255,0.08); text-align:center;
 }
 
@@ -220,19 +220,19 @@ body {
 .np-c { position:absolute; width:12px; height:12px; border-color:var(--gold-bright); border-style:solid; }
 .np-c.tl{top:-1px;left:-1px;border-width:2.5px 0 0 2.5px;} .np-c.tr{top:-1px;right:-1px;border-width:2.5px 2.5px 0 0;}
 .np-c.bl{bottom:-1px;left:-1px;border-width:0 0 2.5px 2.5px;} .np-c.br{bottom:-1px;right:-1px;border-width:0 2.5px 2.5px 0;}
-.np-label { font-family:'Cinzel',serif; font-weight:700; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--ink); margin-bottom:2px; }
-.np-value { font-family:'Chomsky',serif; font-size:22px; color:var(--ink); min-height:28px; letter-spacing:1px; }
+.np-label { font-family:'Cinzel',serif; font-weight:700; font-size:12px; letter-spacing:4px; text-transform:uppercase; color:var(--ink); margin-bottom:2px; }
+.np-value { font-family:'Chomsky',serif; font-size:23px; color:var(--ink); min-height:28px; letter-spacing:1px; }
 
 /* ── FORM ── */
-.form-title { font-family:'Cinzel',serif; font-size:10.5px; letter-spacing:3.5px; color:var(--blood); text-transform:uppercase; text-align:center; margin-bottom:16px; }
+.form-title { font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:3.5px; color:var(--blood); text-transform:uppercase; text-align:center; margin-bottom:16px; }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
 .form-group { display:flex; flex-direction:column; gap:4px; }
 .form-group.full { grid-column:1/-1; }
-label { font-family:'Cinzel',serif; font-size:9.5px; letter-spacing:2.5px; color:var(--blood); text-transform:uppercase; }
+label { font-family:'Cinzel',serif; font-size:10.5px; letter-spacing:2.5px; color:var(--blood); text-transform:uppercase; }
 input,textarea,select {
   background:rgba(255,255,255,0.22); border:none;
   border-bottom:2px solid var(--ink); border-left:1px solid rgba(58,37,8,0.22);
-  padding:8px 11px; font-family:'IM Fell English',serif; font-size:15px;
+  padding:8px 11px; font-family:'IM Fell English',serif; font-size:16px;
   color:var(--ink); outline:none; transition:all 0.2s; width:100%;
 }
 input:focus,textarea:focus,select:focus {
@@ -245,7 +245,7 @@ textarea { resize:vertical; min-height:65px; }
 .submit-btn {
   display:block; width:100%; margin-top:18px; padding:14px 24px;
   background:linear-gradient(180deg,#3a2508 0%,#221504 100%);
-  color:var(--parch); font-family:'Cinzel',serif; font-size:13px; font-weight:700;
+  color:var(--parch); font-family:'Cinzel',serif; font-size:14px; font-weight:700;
   letter-spacing:5px; text-transform:uppercase;
   border:2px solid var(--gold); cursor:pointer;
   box-shadow:0 5px 18px rgba(0,0,0,0.45),inset 0 1px 0 rgba(196,149,24,0.25);
@@ -253,7 +253,7 @@ textarea { resize:vertical; min-height:65px; }
 }
 .submit-btn:hover { background:linear-gradient(180deg,#5c3d10 0%,#3a2508 100%); letter-spacing:6px; box-shadow:0 7px 24px rgba(0,0,0,0.55),inset 0 1px 0 rgba(196,149,24,0.35); transform:translateY(-2px); }
 .submit-btn:active { transform:translateY(0); }
-.success-msg { display:none; margin-top:14px; border:2px solid var(--gold); padding:16px; text-align:center; font-family:'IM Fell English',serif; font-size:14px; color:var(--blood); background:rgba(196,149,24,0.08); line-height:1.7; }
+.success-msg { display:none; margin-top:14px; border:2px solid var(--gold); padding:16px; text-align:center; font-family:'IM Fell English',serif; font-size:15px; color:var(--blood); background:rgba(196,149,24,0.08); line-height:1.7; }
 
 /* ── BOTTOM ILLUSTRATION ── */
 .bottom-illo {
@@ -270,15 +270,15 @@ textarea { resize:vertical; min-height:65px; }
 }
 .bottom-cap {
   background:linear-gradient(90deg,var(--border) 0%,#5a3a10 50%,var(--border) 100%);
-  text-align:center; font-family:'Cinzel',serif; font-size:9.5px;
+  text-align:center; font-family:'Cinzel',serif; font-size:10.5px;
   letter-spacing:5px; color:var(--parch-mid); padding:5px 12px;
   text-transform:uppercase; border-top:1.5px solid var(--gold); opacity:0.9;
 }
 
 /* ── FOOTER ── */
 .footer-seal { text-align:center; padding:16px 18px 24px; border-top:1px solid rgba(58,37,8,0.22); margin:12px 18px 0; }
-.seal-glyph { font-family:'Cinzel',serif; font-size:34px; color:var(--gold); opacity:0.55; display:block; margin-bottom:6px; }
-.seal-text { font-family:'Cinzel',serif; font-size:10px; letter-spacing:3.5px; color:var(--parch-shadow); text-transform:uppercase; }
+.seal-glyph { font-family:'Cinzel',serif; font-size:35px; color:var(--gold); opacity:0.55; display:block; margin-bottom:6px; }
+.seal-text { font-family:'Cinzel',serif; font-size:11px; letter-spacing:3.5px; color:var(--parch-shadow); text-transform:uppercase; }
 
 /* ── SECTION WRAPPER (shared spacing) ── */
 .sec { margin:14px 18px 0; }
@@ -291,8 +291,8 @@ textarea { resize:vertical; min-height:65px; }
   .panel-grid{grid-template-columns:1fr;}
   .panel-cell:first-child{border-right:none;border-bottom:1.5px solid var(--border);}
   .form-row{grid-template-columns:1fr;}
-  .rune-col{width:16px;font-size:8px;letter-spacing:4px;}
-  .banner-text{font-size:22px;}
+  .rune-col{width:16px;font-size:9px;letter-spacing:4px;}
+  .banner-text{font-size:23px;}
 }
 
 /* ── PASSWORD GATE ── */
@@ -325,7 +325,7 @@ textarea { resize:vertical; min-height:65px; }
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
 }
 .pw-d20 {
-  text-align:center; font-size:64px; line-height:1; margin-bottom:4px;
+  text-align:center; font-size:65px; line-height:1; margin-bottom:4px;
   filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5));
   animation:float 3s ease-in-out infinite;
 }
@@ -334,20 +334,20 @@ textarea { resize:vertical; min-height:65px; }
 }
 .pw-title {
   font-family:'Chomsky',serif;
-  font-size:clamp(20px,5vw,32px);
+  font-size:clamp(21px,5vw,33px);
   color:var(--ink); text-align:center; margin-bottom:6px;
   text-shadow:1px 2px 0 rgba(255,255,255,0.2);
 }
 .pw-subtitle {
   font-family:'IM Fell English',Georgia,serif; font-style:italic;
-  font-size:14px; color:var(--ink-faded); text-align:center;
+  font-size:15px; color:var(--ink-faded); text-align:center;
   margin-bottom:22px; line-height:1.6;
 }
 .pw-rule { display:flex; align-items:center; gap:8px; margin-bottom:22px; }
 .pw-rule-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); }
-.pw-rule-mid  { font-size:12px; color:var(--gold); letter-spacing:5px; }
+.pw-rule-mid  { font-size:13px; color:var(--gold); letter-spacing:5px; }
 .pw-label {
-  font-family:'Cinzel',serif; font-size:9.5px; letter-spacing:2.5px;
+  font-family:'Cinzel',serif; font-size:10.5px; letter-spacing:2.5px;
   color:var(--blood); text-transform:uppercase; display:block; margin-bottom:7px;
   text-align:center;
 }
@@ -356,7 +356,7 @@ textarea { resize:vertical; min-height:65px; }
   width:100%; padding:12px 16px; text-align:center;
   background:rgba(255,255,255,0.3); border:none;
   border-bottom:2.5px solid var(--border); border-left:1px solid rgba(58,37,8,0.3);
-  font-family:'IM Fell English',serif; font-size:18px; letter-spacing:4px;
+  font-family:'IM Fell English',serif; font-size:19px; letter-spacing:4px;
   color:var(--ink); outline:none; transition:all 0.2s;
 }
 .pw-input-wrap input:focus {
@@ -366,7 +366,7 @@ textarea { resize:vertical; min-height:65px; }
 .pw-btn {
   display:block; width:100%; padding:13px 24px;
   background:linear-gradient(180deg,#3a2508 0%,#221504 100%);
-  color:var(--parch); font-family:'Cinzel',serif; font-size:12px; font-weight:700;
+  color:var(--parch); font-family:'Cinzel',serif; font-size:13px; font-weight:700;
   letter-spacing:4px; text-transform:uppercase;
   border:2px solid var(--gold); cursor:pointer;
   box-shadow:0 5px 18px rgba(0,0,0,0.45),inset 0 1px 0 rgba(196,149,24,0.25);
@@ -377,7 +377,7 @@ textarea { resize:vertical; min-height:65px; }
 .pw-err {
   display:none; margin-top:12px; text-align:center; padding:9px;
   border:1.5px solid var(--blood); background:rgba(107,26,26,0.1);
-  font-family:'Cinzel',serif; font-size:11px; color:var(--blood); letter-spacing:1px;
+  font-family:'Cinzel',serif; font-size:12px; color:var(--blood); letter-spacing:1px;
   animation:shake 0.4s ease;
 }
 @keyframes shake {
@@ -519,9 +519,9 @@ textarea { resize:vertical; min-height:65px; }
           <div class="cbr tl"></div><div class="cbr tr"></div>
           <div class="cbr bl"></div><div class="cbr br"></div>
           <div class="c-name">Alan Moote &amp; Theresa Hanlon</div>
-          <div class="c-role">Dungeon Masters &amp; Campaign Hosts</div>
+          <div class="c-role">Campaign Hosts</div>
           <div class="c-row"><span class="c-icon">📞</span><span>(416) 567-6603 &nbsp;·&nbsp; (416) 567-0224</span></div>
-          <div class="c-row"><span class="c-icon">📧</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdaca1aca38da0a2a2b9e3a8be">[email&#160;protected]</a> &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="95fdf4fbf9fafbcae1fdf0e7f0e6f4d5fae0e1f9fafafebbf6faf8">[email&#160;protected]</a></span></div>
+          <div class="c-row"><span class="c-icon">📧</span><span><a href="mailto:alan@moot.es">alan@moot.es</a> &nbsp;·&nbsp; <a href="mailto:hanlon_theresa@outlook.com">hanlon_theresa@outlook.com</a></span></div>
           <div class="c-row"><span class="c-icon">🏠</span><span>92 Burlingame Rd, Etobicoke, ON &nbsp;M8W 1Z2</span></div>
         </div>
       </div>
@@ -537,7 +537,7 @@ textarea { resize:vertical; min-height:65px; }
       <div class="sec fi" style="animation-delay:1.5s">
         <div class="section-header">📅 &nbsp; Kickoff &amp; Character Creation — Choose Your Time &nbsp; 📅</div>
         <p class="cal-intro">Select <strong>all the times</strong> when you could attend our first session — the Kickoff &amp; Character Creation gathering. The Guild Masters will choose the time that works for the most adventurers!<br><br>
-        <span style="font-size:13px;opacity:0.8;">Weekday After School: ~4:00–7:00 pm &nbsp;·&nbsp; Saturday &amp; Sunday Morning: 10:00 am–1:00 pm &nbsp;·&nbsp; Afternoon: 1:00–4:00 pm</span></p>
+        <span style="font-size:14px;opacity:0.8;">Weekday After School: ~4:00–7:00 pm &nbsp;·&nbsp; Saturday &amp; Sunday Morning: 10:00 am–1:00 pm &nbsp;·&nbsp; Afternoon: 1:00–4:00 pm</span></p>
         <div class="cal-grid" id="calGrid"></div>
         <div class="sel-dates" id="selDisplay">No times selected yet…</div>
       </div>
@@ -621,7 +621,7 @@ textarea { resize:vertical; min-height:65px; }
       <div class="footer-seal fi" style="animation-delay:2.1s">
         <span class="seal-glyph">⚜</span>
         <div class="seal-text">The Borderlands Campaign &nbsp;·&nbsp; Est. MMXXVI</div>
-        <div class="seal-text" style="font-size:9px;margin-top:5px;opacity:0.55;">In nomine gloriae et adventurae</div>
+        <div class="seal-text" style="font-size:10px;margin-top:5px;opacity:0.55;">In nomine gloriae et adventurae</div>
       </div>
 
     </div><!-- /inner-page -->
@@ -741,7 +741,18 @@ document.getElementById('advName').addEventListener('input', function() {
   document.getElementById('namePlateVal').textContent = this.value.trim() || '\u00a0';
 });
 
-function submitForm() {
+// ══════════════════════════════════════════════════════
+// SETUP — create a free bin at https://jsonbin.io
+//   1. Sign up → API Keys → copy your Master Key
+//   2. New Bin → paste {"submissions":[]} as content → Save
+//   3. Copy the Bin ID from the URL bar
+//   Replace the two constants below:
+const JSONBIN_KEY = '$2a$10$REPLACE_WITH_YOUR_MASTER_KEY';
+const JSONBIN_ID  = 'REPLACE_WITH_YOUR_BIN_ID';
+// ══════════════════════════════════════════════════════
+
+async function submitForm() {
+  const btn = document.querySelector('.submit-btn');
   const n   = document.getElementById('advName').value.trim();
   const p   = document.getElementById('parentName').value.trim();
   const ph  = document.getElementById('parentPhone').value.trim();
@@ -754,33 +765,63 @@ function submitForm() {
     return;
   }
 
-  // Build the list of selected times
-  const allSlots = week1.concat(week2);
-  const timeLines = allSlots
+  btn.disabled    = true;
+  btn.textContent = '⏳  Sending your oath…';
+
+  const allSlots      = week1.concat(week2);
+  const selectedTimes = allSlots
     .filter(function(s){ return chosen.has(s.key); })
-    .map(function(s){ return '  • ' + s.dayName + ', ' + MO2[s.date.getMonth()] + ' ' + s.date.getDate() + ' — ' + s.timeLabel + ' (' + s.timeShort + ')'; });
-  const timesText = timeLines.length > 0
-    ? timeLines.join('\n')
-    : '  (no times selected)';
+    .map(function(s){
+      return s.dayName + ', ' + MO2[s.date.getMonth()] + ' ' + s.date.getDate() +
+             ' — ' + s.timeLabel + ' (' + s.timeShort + ')';
+    });
 
-  const body =
-    'ADVENTURER REGISTRATION\n' +
-    '========================\n\n' +
-    'Adventurer\'s Name: ' + n + '\n' +
-    'Parent / Guardian: ' + p + '\n' +
-    'Phone: '             + ph + '\n' +
-    'Email: '             + (em || '—') + '\n' +
-    'Character Class: '   + (cls || '—') + '\n\n' +
-    'AVAILABLE KICKOFF TIMES:\n' +
-    timesText + '\n\n' +
-    'Notes / Allergies:\n' + (nt || '—');
+  const submission = {
+    timestamp:      new Date().toISOString(),
+    adventurerName: n,
+    parentName:     p,
+    phone:          ph,
+    email:          em  || '',
+    characterClass: cls || '',
+    notes:          nt  || '',
+    availableTimes: selectedTimes
+  };
 
-  const mailto = 'mailto:alanmoote@gmail.com' +
-    '?subject=' + encodeURIComponent('D&D Borderlands — ' + n + ' wants to adventure!') +
-    '&body='    + encodeURIComponent(body);
+  // ── 1. Email notification via formsubmit.co (open relay, no account needed) ──
+  try {
+    await fetch('https://formsubmit.co/ajax/borderlands-invite@moog.mozmail.com', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject:         '⚔ New Adventurer: ' + n,
+        _template:        'table',
+        Adventurer:       n,
+        Parent:           p,
+        Phone:            ph,
+        Email:            em  || '—',
+        Class:            cls || '—',
+        'Available Times': selectedTimes.join(' | ') || '(none selected)',
+        Notes:            nt  || '—'
+      })
+    });
+  } catch(e) { console.warn('Email notify failed:', e); }
 
-  window.location.href = mailto;
+  // ── 2. Store submission in JSONBin ──
+  try {
+    const readResp = await fetch('https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest', {
+      headers: { 'X-Master-Key': JSONBIN_KEY }
+    });
+    const existing = await readResp.json();
+    const entries  = (existing.record && existing.record.submissions) ? existing.record.submissions : [];
+    entries.push(submission);
+    await fetch('https://api.jsonbin.io/v3/b/' + JSONBIN_ID, {
+      method:  'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
+      body:    JSON.stringify({ submissions: entries })
+    });
+  } catch(e) { console.warn('Storage failed:', e); }
 
+  btn.textContent = '✦  Oath Sent!';
   document.getElementById('successMsg').style.display = 'block';
 }
 </script>
