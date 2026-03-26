@@ -7,7 +7,12 @@
       "Bash(gh auth:*)",
       "Bash(gh repo:*)",
       "Bash(gh api:*)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" -H \"X-Master-Key: $2a$10$svXdp5nSYwNcw7CsR8tBreA/E1KuJ8oGW4qvEFwZzF6QzVOTEt2D6\" \"https://api.jsonbin.io/v3/b/69c42c91b7ec241ddca20f73/latest\")",
+      "Bash(curl -s -H \"X-Master-Key: $2a$10$svXdp5nSYwNcw7CsR8tBreA/E1KuJ8oGW4qvEFwZzF6QzVOTEt2D6\" \"https://api.jsonbin.io/v3/b/69c42c91b7ec241ddca20f73/latest\")",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d, indent=2\\)\\)\")",
+      "Bash(curl -s -H \"X-Master-Key: $2a$10$$2a$10$svXdp5nSYwNcw7CsR8tBreA/E1KuJ8oGW4qvEFwZzF6QzVOTEt2D6\" \"https://api.jsonbin.io/v3/b/69c42c91b7ec241ddca20f73/latest\")",
+      "Bash(gh pr:*)"
     ]
   }
 }
