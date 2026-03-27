@@ -777,52 +777,51 @@ async function submitForm() {
   btn.disabled    = true;
   btn.textContent = '⏳  Sending your oath…';
 
-  const allSlots      = week1.concat(week2);
-  const selectedTimes = allSlots
-    .filter(function(s){ return chosen.has(s.key); })
-    .map(function(s){
-      return s.dayName + ', ' + MO2[s.date.getMonth()] + ' ' + s.date.getDate() +
-             ' — ' + s.timeLabel + ' (' + s.timeShort + ')';
-    });
-
-  const submission = {
-    timestamp:      new Date().toISOString(),
-    adventurerName: n,
-    parentName:     p,
-    phone:          ph,
-    email:          em  || '',
-    characterClass: cls || '',
-    notes:          nt  || '',
-    availableTimes: selectedTimes
-  };
-
-  function fetchWithTimeout(url, options, ms) {
-    const ctrl = new AbortController();
-    const tid  = setTimeout(function(){ ctrl.abort(); }, ms);
-    return fetch(url, Object.assign({}, options, { signal: ctrl.signal }))
-      .finally(function(){ clearTimeout(tid); });
-  }
-
-  // ── 1. Email notification — fire-and-forget, never blocks the form ──
-  // (formsubmit.co requires one-time email activation; don't await it)
-  fetch('https://formsubmit.co/ajax/borderlands-invite@moog.mozmail.com', {
-    method:  'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
-      _subject:         '⚔ New Adventurer: ' + n,
-      _template:        'table',
-      Adventurer:       n,
-      Parent:           p,
-      Phone:            ph,
-      Email:            em  || '—',
-      Class:            cls || '—',
-      'Available Times': selectedTimes.join(' | ') || '(none selected)',
-      Notes:            nt  || '—'
-    })
-  }).catch(function(e){ console.warn('Email notify failed:', e); });
-
-  // ── 2. Store submission in JSONBin (8 s timeout) ──
   try {
+    const selectedTimes = allSlots
+      .filter(function(s){ return chosen.has(s.key); })
+      .map(function(s){
+        return s.dayName + ', ' + MO2[s.date.getMonth()] + ' ' + s.date.getDate() +
+               ' — ' + s.timeLabel + ' (' + s.timeShort + ')';
+      });
+
+    const submission = {
+      timestamp:      new Date().toISOString(),
+      adventurerName: n,
+      parentName:     p,
+      phone:          ph,
+      email:          em  || '',
+      characterClass: cls || '',
+      notes:          nt  || '',
+      availableTimes: selectedTimes
+    };
+
+    function fetchWithTimeout(url, options, ms) {
+      const ctrl = new AbortController();
+      const tid  = setTimeout(function(){ ctrl.abort(); }, ms);
+      return fetch(url, Object.assign({}, options, { signal: ctrl.signal }))
+        .finally(function(){ clearTimeout(tid); });
+    }
+
+    // ── 1. Email notification — fire-and-forget, never blocks the form ──
+    // (formsubmit.co requires one-time email activation; don't await it)
+    fetch('https://formsubmit.co/ajax/borderlands-invite@moog.mozmail.com', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject:         '⚔ New Adventurer: ' + n,
+        _template:        'table',
+        Adventurer:       n,
+        Parent:           p,
+        Phone:            ph,
+        Email:            em  || '—',
+        Class:            cls || '—',
+        'Available Times': selectedTimes.join(' | ') || '(none selected)',
+        Notes:            nt  || '—'
+      })
+    }).catch(function(e){ console.warn('Email notify failed:', e); });
+
+    // ── 2. Store submission in JSONBin (8 s timeout) ──
     const readResp = await fetchWithTimeout(
       'https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest',
       { headers: { 'X-Master-Key': JSONBIN_KEY } },
@@ -840,7 +839,7 @@ async function submitForm() {
       },
       8000
     );
-  } catch(e) { console.warn('Storage failed:', e); }
+  } catch(e) { console.warn('Submission error:', e); }
 
   btn.textContent = '✦  Oath Sent!';
   document.getElementById('successMsg').style.display = 'block';

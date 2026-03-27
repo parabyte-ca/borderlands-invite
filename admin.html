@@ -363,8 +363,11 @@ async function loadData() {
   });
 
   try {
+    const ctrl = new AbortController();
+    setTimeout(function(){ ctrl.abort(); }, 8000);
     const resp = await fetch('https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest', {
-      headers: { 'X-Master-Key': JSONBIN_KEY }
+      headers: { 'X-Master-Key': JSONBIN_KEY },
+      signal:  ctrl.signal
     });
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const data = await resp.json();
