@@ -523,7 +523,7 @@ textarea { resize:vertical; min-height:65px; }
           <div class="c-name">Alan Moote &amp; Theresa Hanlon</div>
           <div class="c-role">Campaign Hosts</div>
           <div class="c-row"><span class="c-icon">📞</span><span>(416) 567-6603 &nbsp;·&nbsp; (416) 567-0224</span></div>
-          <div class="c-row"><span class="c-icon">📧</span><span><a href="mailto:alan@moot.es">alan@moot.es</a> &nbsp;·&nbsp; <a href="mailto:hanlon_theresa@outlook.com">hanlon_theresa@outlook.com</a></span></div>
+          <div class="c-row"><span class="c-icon">📧</span><span id="emailRow"></span></div>
           <div class="c-row"><span class="c-icon">🏠</span><span>92 Burlingame Rd, Etobicoke, ON &nbsp;M8W 1Z2</span></div>
         </div>
       </div>
@@ -736,6 +736,14 @@ function updateSel() {
     .map(function(s){ return s.dayName + ', ' + MO2[s.date.getMonth()] + ' ' + s.date.getDate() + ' — ' + s.timeLabel + ' (' + s.timeShort + ')'; });
   el.innerHTML = lines.join('<br>');
 }
+
+// Email addresses rendered via JS to prevent Cloudflare obfuscation
+(function() {
+  var e1 = ['alan','moot.es'].join('@');
+  var e2 = ['hanlon_theresa','outlook.com'].join('@');
+  var el = document.getElementById('emailRow');
+  if (el) el.innerHTML = '<a href="mailto:' + e1 + '">' + e1 + '</a> &nbsp;·&nbsp; <a href="mailto:' + e2 + '">' + e2 + '</a>';
+})();
 
 // Live name-plate mirror
 document.getElementById('advName').addEventListener('input', function() {
