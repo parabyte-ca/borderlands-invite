@@ -198,6 +198,8 @@ body {
 .sun-card:hover { background:rgba(180,130,30,0.15); border-color:var(--gold); transform:translateY(-2px); box-shadow:0 5px 14px rgba(0,0,0,0.22),inset 0 0 0 1px var(--gold); }
 .sun-card.chosen { background:linear-gradient(135deg,rgba(120,85,15,0.28),rgba(196,149,24,0.22)); border-color:var(--gold-bright); box-shadow:0 0 0 1.5px var(--gold-bright),0 5px 14px rgba(0,0,0,0.22); }
 .sun-card.chosen::after { content:'✦'; position:absolute; top:3px; right:5px; font-size:10px; color:var(--gold-bright); }
+.sun-card.unavail { opacity:0.38; cursor:not-allowed; pointer-events:none; background:rgba(0,0,0,0.06); border-style:dashed; }
+.sun-card.unavail .sun-mo,.sun-card.unavail .sun-dd,.sun-card.unavail .sun-time { color:var(--ink-faded); }
 .sun-mo { font-family:'Cinzel',serif; font-size:11px; font-weight:700; letter-spacing:2px; color:var(--blood); text-transform:uppercase; margin-bottom:3px; }
 .sun-dd { font-family:'Cinzel',serif; font-size:14px; font-weight:600; color:var(--ink); line-height:1.2; margin-bottom:4px; }
 .sun-dy { font-family:'Cinzel',serif; font-size:10.5px; font-weight:600; letter-spacing:1px; color:var(--ink-mid); margin-top:2px; }
@@ -537,7 +539,7 @@ textarea { resize:vertical; min-height:65px; }
       <div class="sec fi" style="animation-delay:1.5s">
         <div class="section-header">📅 &nbsp; Kickoff &amp; Character Creation — Choose Your Time &nbsp; 📅</div>
         <p class="cal-intro">Select <strong>all the times</strong> when you could attend our first session — the Kickoff &amp; Character Creation gathering. The Guild Masters will choose the time that works for the most adventurers!<br><br>
-        <span style="font-size:14px;opacity:0.8;">Weekday After School: ~4:00–7:00 pm &nbsp;·&nbsp; Saturday &amp; Sunday Morning: 10:00 am–1:00 pm &nbsp;·&nbsp; Afternoon: 1:00–4:00 pm</span></p>
+        <span style="font-size:14px;opacity:0.8;">Weekday After School: ~4:00–7:00 pm &nbsp;·&nbsp; Saturday &amp; Sunday Morning: 10:00 am–1:00 pm &nbsp;·&nbsp; Afternoon: 1:00–4:00 pm &nbsp;·&nbsp; Mondays &amp; Wednesdays unavailable</span></p>
         <div class="cal-grid" id="calGrid"></div>
         <div class="sel-dates" id="selDisplay">No times selected yet…</div>
       </div>
@@ -660,76 +662,75 @@ function checkPw() {
 const MO2  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const DAYS  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-const WEEK1_START = new Date(2026, 3, 27); // Mon Apr 27 2026
+// Sun Mar 29 – Sun Apr 5 · Mon & Wed unavailable
+const SLOT_CONFIGS = [
+  { date: new Date(2026, 2, 29), timeLabel: 'Morning',      timeShort: '10 am – 1 pm' },
+  { date: new Date(2026, 2, 29), timeLabel: 'Afternoon',    timeShort: '1 – 4 pm'     },
+  { date: new Date(2026, 2, 30), unavail: true },
+  { date: new Date(2026, 2, 31), timeLabel: 'After School', timeShort: '4 – 7 pm'     },
+  { date: new Date(2026, 3,  1), unavail: true },
+  { date: new Date(2026, 3,  2), timeLabel: 'After School', timeShort: '4 – 7 pm'     },
+  { date: new Date(2026, 3,  3), timeLabel: 'After School', timeShort: '4 – 7 pm'     },
+  { date: new Date(2026, 3,  4), timeLabel: 'Morning',      timeShort: '10 am – 1 pm' },
+  { date: new Date(2026, 3,  4), timeLabel: 'Afternoon',    timeShort: '1 – 4 pm'     },
+  { date: new Date(2026, 3,  5), timeLabel: 'Morning',      timeShort: '10 am – 1 pm' },
+  { date: new Date(2026, 3,  5), timeLabel: 'Afternoon',    timeShort: '1 – 4 pm'     },
+];
 
-function buildSlots(weekMonday) {
-  const monOffset = [6,0,1,2,3,4,5];
-  const configs = [
-    { day:2, timeLabel:'After School', timeShort:'4–7 pm'       },
-    { day:4, timeLabel:'After School', timeShort:'4–7 pm'       },
-    { day:5, timeLabel:'After School', timeShort:'4–7 pm'       },
-    { day:6, timeLabel:'Morning',      timeShort:'10 am – 1 pm' },
-    { day:6, timeLabel:'Afternoon',    timeShort:'1 – 4 pm'     },
-    { day:0, timeLabel:'Morning',      timeShort:'10 am – 1 pm' },
-    { day:0, timeLabel:'Afternoon',    timeShort:'1 – 4 pm'     },
-  ];
-  return configs.map(function(c) {
-    const d = new Date(weekMonday);
-    d.setDate(weekMonday.getDate() + monOffset[c.day]);
+const allSlots = SLOT_CONFIGS
+  .filter(function(c){ return !c.unavail; })
+  .map(function(c){
     return {
-      date:      d,
-      dayName:   DAYS[c.day],
+      date:      c.date,
+      dayName:   DAYS[c.date.getDay()],
       timeLabel: c.timeLabel,
       timeShort: c.timeShort,
-      key:       d.toDateString() + '::' + c.timeLabel
+      key:       c.date.toDateString() + '::' + c.timeLabel
     };
   });
-}
 
-const WEEK2_START = new Date(WEEK1_START);
-WEEK2_START.setDate(WEEK1_START.getDate() + 7);
-
-const week1  = buildSlots(WEEK1_START);
-const week2  = buildSlots(WEEK2_START);
 const chosen = new Set();
 const grid   = document.getElementById('calGrid');
 
-function renderWeek(slots, weekLabel) {
-  const first = slots[0].date;
-  const last  = slots[slots.length - 1].date;
-  const lbl   = document.createElement('div');
-  lbl.className   = 'cal-week-label';
-  lbl.textContent = weekLabel + '  ·  ' +
-    MO2[first.getMonth()] + ' ' + first.getDate() + ' – ' +
-    MO2[last.getMonth()]  + ' ' + last.getDate();
-  grid.appendChild(lbl);
+// Week label
+const _wlbl = document.createElement('div');
+_wlbl.className   = 'cal-week-label';
+_wlbl.textContent = 'Mar 29 – Apr 5';
+grid.appendChild(_wlbl);
 
-  slots.forEach(function(s) {
-    const card = document.createElement('div');
-    card.className = 'sun-card';
+SLOT_CONFIGS.forEach(function(c) {
+  const card = document.createElement('div');
+  if (c.unavail) {
+    card.className = 'sun-card unavail';
     card.innerHTML =
-      '<div class="sun-mo">'  + s.dayName + '</div>' +
-      '<div class="sun-dd">'  + MO2[s.date.getMonth()] + ' ' + s.date.getDate() + '</div>' +
-      '<div class="sun-time">' + s.timeLabel + '<br><em>' + s.timeShort + '</em></div>';
-    card.addEventListener('click', function() {
-      if (chosen.has(s.key)) {
-        chosen.delete(s.key);  card.classList.remove('chosen');
-      } else {
-        chosen.add(s.key);     card.classList.add('chosen');
-      }
-      updateSel();
-    });
+      '<div class="sun-mo">'   + DAYS[c.date.getDay()] + '</div>' +
+      '<div class="sun-dd">'   + MO2[c.date.getMonth()] + ' ' + c.date.getDate() + '</div>' +
+      '<div class="sun-time">Unavailable</div>';
     grid.appendChild(card);
+    return;
+  }
+  const s = allSlots.find(function(sl){
+    return sl.date.toDateString() === c.date.toDateString() && sl.timeLabel === c.timeLabel;
   });
-}
-
-renderWeek(week1, 'Week One');
-renderWeek(week2, 'Week Two');
+  card.className = 'sun-card';
+  card.innerHTML =
+    '<div class="sun-mo">'   + DAYS[c.date.getDay()] + '</div>' +
+    '<div class="sun-dd">'   + MO2[c.date.getMonth()] + ' ' + c.date.getDate() + '</div>' +
+    '<div class="sun-time">' + c.timeLabel + '<br><em>' + c.timeShort + '</em></div>';
+  card.addEventListener('click', function() {
+    if (chosen.has(s.key)) {
+      chosen.delete(s.key); card.classList.remove('chosen');
+    } else {
+      chosen.add(s.key);    card.classList.add('chosen');
+    }
+    updateSel();
+  });
+  grid.appendChild(card);
+});
 
 function updateSel() {
   const el = document.getElementById('selDisplay');
   if (chosen.size === 0) { el.textContent = 'No times selected yet…'; return; }
-  const allSlots = week1.concat(week2);
   const lines = allSlots
     .filter(function(s){ return chosen.has(s.key); })
     .map(function(s){ return s.dayName + ', ' + MO2[s.date.getMonth()] + ' ' + s.date.getDate() + ' — ' + s.timeLabel + ' (' + s.timeShort + ')'; });

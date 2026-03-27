@@ -4,8 +4,8 @@
     {
       "name": "Borderlands Invite (static)",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "3000", "--directory", "C:\\Users\\alan\\borderlands-invite"],
-      "port": 3000
+      "runtimeArgs": ["-m", "http.server", "3001", "--directory", "C:\\Users\\alan\\borderlands-invite"],
+      "port": 3001
     }
   ]
 }
