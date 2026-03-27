@@ -803,50 +803,44 @@ async function submitForm() {
       .finally(function(){ clearTimeout(tid); });
   }
 
-  // ── 1 & 2. Fire email notification and JSONBin storage in parallel ──
-  const emailPromise = fetchWithTimeout(
-    'https://formsubmit.co/ajax/borderlands-invite@moog.mozmail.com',
-    {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        _subject:         '⚔ New Adventurer: ' + n,
-        _template:        'table',
-        Adventurer:       n,
-        Parent:           p,
-        Phone:            ph,
-        Email:            em  || '—',
-        Class:            cls || '—',
-        'Available Times': selectedTimes.join(' | ') || '(none selected)',
-        Notes:            nt  || '—'
-      })
-    },
-    10000
-  ).catch(function(e){ console.warn('Email notify failed:', e); });
+  // ── 1. Email notification — fire-and-forget, never blocks the form ──
+  // (formsubmit.co requires one-time email activation; don't await it)
+  fetch('https://formsubmit.co/ajax/borderlands-invite@moog.mozmail.com', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      _subject:         '⚔ New Adventurer: ' + n,
+      _template:        'table',
+      Adventurer:       n,
+      Parent:           p,
+      Phone:            ph,
+      Email:            em  || '—',
+      Class:            cls || '—',
+      'Available Times': selectedTimes.join(' | ') || '(none selected)',
+      Notes:            nt  || '—'
+    })
+  }).catch(function(e){ console.warn('Email notify failed:', e); });
 
-  const storagePromise = (async function() {
-    try {
-      const readResp = await fetchWithTimeout(
-        'https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest',
-        { headers: { 'X-Master-Key': JSONBIN_KEY } },
-        10000
-      );
-      const existing = await readResp.json();
-      const entries  = (existing.record && existing.record.submissions) ? existing.record.submissions : [];
-      entries.push(submission);
-      await fetchWithTimeout(
-        'https://api.jsonbin.io/v3/b/' + JSONBIN_ID,
-        {
-          method:  'PUT',
-          headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
-          body:    JSON.stringify({ submissions: entries })
-        },
-        10000
-      );
-    } catch(e) { console.warn('Storage failed:', e); }
-  })();
-
-  await Promise.allSettled([emailPromise, storagePromise]);
+  // ── 2. Store submission in JSONBin (8 s timeout) ──
+  try {
+    const readResp = await fetchWithTimeout(
+      'https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest',
+      { headers: { 'X-Master-Key': JSONBIN_KEY } },
+      8000
+    );
+    const existing = await readResp.json();
+    const entries  = (existing.record && existing.record.submissions) ? existing.record.submissions : [];
+    entries.push(submission);
+    await fetchWithTimeout(
+      'https://api.jsonbin.io/v3/b/' + JSONBIN_ID,
+      {
+        method:  'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
+        body:    JSON.stringify({ submissions: entries })
+      },
+      8000
+    );
+  } catch(e) { console.warn('Storage failed:', e); }
 
   btn.textContent = '✦  Oath Sent!';
   document.getElementById('successMsg').style.display = 'block';
